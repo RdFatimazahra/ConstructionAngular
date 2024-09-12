@@ -9,6 +9,9 @@ import { ManageProjetComponent } from './projet/manage-projet/manage-projet.comp
 import { ManageRessourcesComponent } from './ressource/manage-ressources/manage-ressources.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TacheDialogComponent } from './tache/tache-dialog/tache-dialog.component';
+import { ProjetDialogComponent } from './projet/projet-dialog/projet-dialog.component';
+import { RessourceDialogComponent } from './ressource/ressource-dialog/ressource-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     ManageProjetComponent,
     ManageRessourcesComponent,
     AdminDashboardComponent,
-    HomePageComponent
+    HomePageComponent,
+    TacheDialogComponent,
+    ProjetDialogComponent,
+    RessourceDialogComponent
   ],
   imports: [
     BrowserModule,
