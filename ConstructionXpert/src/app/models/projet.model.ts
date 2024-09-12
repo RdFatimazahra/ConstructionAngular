@@ -2,7 +2,7 @@
 
 export interface Projet {
 
-        idProjet?: number;
+        idProjet: number;
         nomProjet: string;
         description: string;
         dateDebut: Date;
