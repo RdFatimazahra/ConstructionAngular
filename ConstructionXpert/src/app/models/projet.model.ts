@@ -1,15 +1,14 @@
 
-import { Ressource } from './ressource.model';
+
 export interface Projet {
 
-  
-        idTache: number;
-        idProjet: number;
-        description: string;
-        dateDebut: Date;
-        dateFin: Date;
-        statut: string;
-        ressources: Ressource[];  
-  
+    idProjet: number;
+    nomProjet: string;
+    description: string;
+    dateDebut: Date;
+    dateFin: Date;
+    budget: number;
+
+
 }
 
