@@ -1,4 +1,5 @@
 
+
 export interface Projet {
 
         idProjet?: number;
@@ -7,5 +8,6 @@ export interface Projet {
         dateDebut: Date;
         dateFin: Date;
         budget: number;
+
 }
 
