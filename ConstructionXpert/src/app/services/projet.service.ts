@@ -8,13 +8,13 @@ import { Projet } from '../models/projet.model';
 @Injectable({
   providedIn: 'root'
 })
-export class TacheService {
+export class ProjetService {
   private apiUrl = 'http://localhost:8087/api/projets'; 
 
   constructor(private http: HttpClient) { }
 
   createProjet(projet: Projet): Observable<Projet> {
-    return this.http.post<Projet>(`${this.apiUrl}/projet`, projet)
+    return this.http.post<Projet>(`${this.apiUrl}`, projet)
       .pipe(catchError(this.handleError));
   }
 

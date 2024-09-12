@@ -4,13 +4,17 @@ import { ManageTachesComponent } from './tache/manage-taches/manage-taches.compo
 
 
 
+
 import { MatDialogModule } from '@angular/material/dialog';  // Import MatDialogModule
 import { MatButtonModule } from '@angular/material/button';  
+import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: '/taches', pathMatch: 'full' },
   { path: 'taches', component: ManageTachesComponent },
+  { path: 'projets', component: ManageProjetsComponent},
+
 
 ];
 

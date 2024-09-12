@@ -1,10 +1,50 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Projet } from '../../models/projet.model';
+import { ProjetDialogComponent } from '../../projet/projet-dialog/projet-dialog.component';
+import { ProjetService } from 'src/app/services/projet.service';
 
 @Component({
-  selector: 'app-manage-projet',
+  selector: 'app-manage-projets',
   templateUrl: './manage-projet.component.html',
   styleUrls: ['./manage-projet.component.css']
 })
-export class ManageProjetComponent {
+export class ManageProjetsComponent {
+  projets: Projet[] = [];
+  errorMessage: string | null = null;
 
+  constructor(private projetService: ProjetService, private dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.loadProjets();
+  }
+
+  loadProjets(): void {
+    this.projetService.getAllProject().subscribe(
+      (data: Projet[]) => this.projets = data,
+      error => this.errorMessage = 'Error loading projets'
+    );
+  }
+
+  openDialog(projet: Projet | null = null): void {
+    const dialogRef = this.dialog.open(ProjetDialogComponent, {
+      width: '400px',
+      data: { projet: projet || { idProjet: 0, nomProjet: '', description: '', dateDebut: new Date(), dateFin: new Date(), budget: 0 } }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadProjets();
+      }
+    });
+  }
+
+  deleteProjet(idProjet: number): void {
+    if (confirm('Are you sure you want to delete this projet?')) {
+      this.projetService.deleteProject(idProjet).subscribe(
+        () => this.loadProjets(),
+        error => this.errorMessage = 'Error deleting projet'
+      );
+    }
+  }
 }
