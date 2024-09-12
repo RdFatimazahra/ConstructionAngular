@@ -30,15 +30,16 @@ export class ManageTachesComponent {
   openDialog(tache: Tache | null = null): void {
     const dialogRef = this.dialog.open(TacheDialogComponent, {
       width: '400px',
-      data: { tache: tache || { id: 0, description: '', status: '', date: new Date() } }
+      data: { tache: tache || { idTache: 0, description: '', statut: 'Pending', dateDebut: new Date(), dateFin: new Date() } }
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadTaches();
       }
     });
   }
+  
 
   deleteTache(id: number): void {
     if (confirm('Are you sure you want to delete this tache?')) {

@@ -20,14 +20,23 @@ export class TacheDialogComponent {
   }
 
   save(): void {
+    console.log('Saving tache:', this.tache);
     if (this.tache.idTache === 0) {
       // Create new tache
-      this.tacheService.createTache(this.tache, 1).subscribe(() => this.dialogRef.close(true));
+      this.tacheService.createTache(this.tache, 1).subscribe(() => {
+        console.log('Tache created successfully');
+        this.dialogRef.close(true);
+      });
     } else {
       // Update existing tache
-      this.tacheService.updateTache(this.tache.idTache, this.tache).subscribe(() => this.dialogRef.close(true));
+      this.tacheService.updateTache(this.tache.idTache, this.tache).subscribe(() => {
+        console.log('Tache updated successfully');
+        this.dialogRef.close(true);
+      });
     }
   }
+  
+  
 
   cancel(): void {
     this.dialogRef.close();

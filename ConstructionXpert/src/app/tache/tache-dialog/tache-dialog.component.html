@@ -15,9 +15,15 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Date</mat-label>
+    <mat-label>Date Debut</mat-label>
     <input matInput [matDatepicker]="picker" [(ngModel)]="tache.dateDebut">
     <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date Fin</mat-label>
+    <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="tache.dateFin">
+    <mat-datepicker #pickerEnd></mat-datepicker>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
