@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
@@ -38,6 +38,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
 import { LoginComponent } from './auth/login/login/login.component';
+import { AuthInterceptor } from './interceptors/interceptor';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,11 @@ import { LoginComponent } from './auth/login/login/login.component';
     
   ],
 
+
   providers: [
+
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+   
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService
   ],
