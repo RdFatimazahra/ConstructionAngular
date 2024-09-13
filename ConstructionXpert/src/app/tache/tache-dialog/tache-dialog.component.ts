@@ -13,30 +13,26 @@ export class TacheDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<TacheDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { tache: Tache },
+    @Inject(MAT_DIALOG_DATA) public data: { tache: Tache, projetId: number },
     private tacheService: TacheService
   ) {
     this.tache = data.tache;
   }
 
   save(): void {
-    console.log('Saving tache:', this.tache);
     if (this.tache.idTache === 0) {
       // Create new tache
-      this.tacheService.createTache(this.tache, 1).subscribe(() => {
-        console.log('Tache created successfully');
+      this.tache.idProjet = this.data.projetId; // Set project ID
+      this.tacheService.createTache(this.tache, this.data.projetId).subscribe(() => {
         this.dialogRef.close(true);
       });
     } else {
       // Update existing tache
       this.tacheService.updateTache(this.tache.idTache, this.tache).subscribe(() => {
-        console.log('Tache updated successfully');
         this.dialogRef.close(true);
       });
     }
   }
-  
-  
 
   cancel(): void {
     this.dialogRef.close();

@@ -1,31 +1,37 @@
 <h1 mat-dialog-title>{{ tache.idTache === 0 ? 'Create Tache' : 'Edit Tache' }}</h1>
+
 <div mat-dialog-content>
+  <!-- Description Field -->
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <input matInput [(ngModel)]="tache.description">
+    <input matInput [(ngModel)]="tache.description" placeholder="Enter task description">
   </mat-form-field>
 
+  <!-- Status Field -->
   <mat-form-field appearance="fill">
     <mat-label>Status</mat-label>
-    <mat-select [(ngModel)]="tache.statut">
+    <mat-select [(ngModel)]="tache.statut" placeholder="Select status">
       <mat-option value="Pending">Pending</mat-option>
       <mat-option value="In Progress">In Progress</mat-option>
       <mat-option value="Completed">Completed</mat-option>
     </mat-select>
   </mat-form-field>
 
+  <!-- Start Date Field -->
   <mat-form-field appearance="fill">
     <mat-label>Date Debut</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="tache.dateDebut">
+    <input matInput [matDatepicker]="picker" [(ngModel)]="tache.dateDebut" placeholder="Select start date">
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
+  <!-- End Date Field -->
   <mat-form-field appearance="fill">
     <mat-label>Date Fin</mat-label>
-    <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="tache.dateFin">
+    <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="tache.dateFin" placeholder="Select end date">
     <mat-datepicker #pickerEnd></mat-datepicker>
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-button (click)="save()" cdkFocusInitial>Save</button>
