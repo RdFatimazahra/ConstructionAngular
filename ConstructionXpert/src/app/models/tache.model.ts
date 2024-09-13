@@ -4,7 +4,7 @@ export interface Tache {
 
 
     idTache: number;
-    idProjet?: number;
+    idProjet: number;
     description: string;
     dateDebut: Date;
     dateFin: Date;

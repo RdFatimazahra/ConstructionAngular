@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { faTachometerAlt, faProjectDiagram, faTasks, faSignOutAlt , faTools } from '@fortawesome/free-solid-svg-icons';
 import { ProjetService } from '../../services/projet.service';
 import { TacheService } from '../../services/tache.service';  // Assuming you have this service
+import { Projet } from 'src/app/models/projet.model';
+import { Tache } from 'src/app/models/tache.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -14,6 +16,9 @@ export class AdminDashboardComponent {
   faProjectDiagram = faProjectDiagram;
   faTasks = faTasks;
   faSignOutAlt = faSignOutAlt;
+
+  selectedProject: Projet | null = null;
+  selectedTask: Tache | null = null;
   
 
   
@@ -26,20 +31,23 @@ export class AdminDashboardComponent {
     { section: 'projects', label: 'Projects', icon: faProjectDiagram },
     { section: 'taches', label: 'Tasks', icon: faTasks },
     { label: 'Resources', section: 'resources', icon: faTools },
+  
     
   ];
 
   // Dashboard Cards (summary data)
   dashboardCards = [
-    { title: 'Total Projects', value: '10', link: 'projects', linkText: 'Manage Projects', icon: faProjectDiagram },
+    { title: 'Total Projects', value: '10', link: 'projects', linkText: 'Manage Projects', icon: faProjectDiagram ,trend: 10},
     { title: 'Total Tasks', value: '80', link: 'taches', linkText: 'Manage Tasks', icon: faTasks },
     { title: 'Total Ressources', value: '30', link: 'taches', linkText: 'Manage Ressources', icon: faTools }
   ];
+
 
   constructor(
     private router: Router,
     private ProjetService: ProjetService,
     private tacheService: TacheService
+   
   ) {}
 
   ngOnInit(): void {
@@ -77,4 +85,27 @@ export class AdminDashboardComponent {
   //     error => console.error('Error fetching task count', error)
   //   );
   // }
+
+
+  showProjectDetails(project: Projet): void {
+    console.log('Showing details for project:', project);
+    this.selectedProject = project;
+    this.currentSection = 'projectDetails'; 
+  }
+
+  onProjectSelected(projet: Projet): void {
+    this.selectedProject = projet;
+    this.currentSection = 'project-details'; // Switch to the details view
+  }
+
+  backToProjects(): void {
+    this.selectedProject = null;  // Clear selected project to return to the project list
+
+}
+
+onTaskDetails(tache: Tache): void {
+  this.selectedTask = tache;
+  this.currentSection = 'task-details';
+}
+
 }

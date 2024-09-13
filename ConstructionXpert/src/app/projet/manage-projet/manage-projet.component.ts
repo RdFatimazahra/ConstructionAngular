@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Projet } from '../../models/projet.model';
 import { ProjetDialogComponent } from '../../projet/projet-dialog/projet-dialog.component';
 import { ProjetService } from 'src/app/services/projet.service';
+import { faTrashAlt , faEdit, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-manage-projets',
@@ -12,6 +13,12 @@ import { ProjetService } from 'src/app/services/projet.service';
 export class ManageProjetsComponent {
   projets: Projet[] = [];
   errorMessage: string | null = null;
+
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+  faInfoCircle = faInfoCircle;
+
+  @Output() projectSelected = new EventEmitter<Projet>();
 
   constructor(private projetService: ProjetService, private dialog: MatDialog) { }
 
@@ -46,5 +53,10 @@ export class ManageProjetsComponent {
         error => this.errorMessage = 'Error deleting projet'
       );
     }
+  }
+
+  showDetails(projet: Projet): void {
+    console.log('Selected Project:', projet);
+    this.projectSelected.emit(projet);
   }
 }
