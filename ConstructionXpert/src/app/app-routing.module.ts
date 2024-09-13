@@ -5,9 +5,11 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
 
 
-import { MatDialogModule } from '@angular/material/dialog'; 
-import { MatButtonModule } from '@angular/material/button';  
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
+import {ManageRessourcesComponent} from "./ressource/manage-ressources/manage-ressources.component";
+import {RessourceDialogComponent} from "./ressource/ressource-dialog/ressource-dialog.component";
 
 const routes: Routes = [
 
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'taches', component: ManageTachesComponent },
   { path: 'projets', component: ManageProjetsComponent},
   { path: 'admin-dashboard', component: AdminDashboardComponent},
+  {path:'ressource',component:ManageRessourcesComponent},
+  { path: 'new/:idTache', component: RessourceDialogComponent }
 
 ];
 
@@ -26,7 +30,7 @@ const routes: Routes = [
 
     MatDialogModule,
     MatButtonModule
-    
+
 
   ],
   exports: [RouterModule]
