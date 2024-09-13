@@ -1,0 +1,22 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Enlève la barre de défilement */
+}
+
+.custom-image {
+    max-width: 100%; /* Réduit la largeur à 100% */
+    height: auto; /* Ajuste la hauteur automatiquement */
+    object-fit: contain; /* Assure que l'image soit complètement visible */
+    object-position: center; /* Centre l'image */
+}
+
+.h-custom-2 {
+    height: calc(100vh - 20px); /* Ajuste la hauteur pour éviter le défilement */
+    overflow: hidden;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
+}

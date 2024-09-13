@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +37,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
+import { LoginComponent } from './auth/login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.com
     HomePageComponent,
     TacheDialogComponent,
     ProjetDialogComponent,
-    RessourceDialogComponent
+    RessourceDialogComponent,
+    LoginComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -54,6 +60,8 @@ import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.com
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+
 
     // Angular Material
     MatDialogModule,
@@ -75,7 +83,13 @@ import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.com
   
     
   ],
-  providers: [],
+
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
