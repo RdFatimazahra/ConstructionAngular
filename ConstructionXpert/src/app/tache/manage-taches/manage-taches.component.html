@@ -3,7 +3,7 @@
 <div class="bg-white rounded-3xl shadow-xl p-8 mb-10">
     <button 
       (click)="openDialog()" 
-      class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 font-bold shadow-lg transform hover:scale-105"
+      class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300  shadow-lg transform hover:scale-105"
     >
       Create New Tache
     </button>
@@ -26,8 +26,8 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ tache.idTache }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.idProjet }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.description }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.dateDebut }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.dateFin }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.dateDebut | date: 'mediumDate'}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.dateFin| date: 'mediumDate' }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" 
                     [ngClass]="{'bg-green-100 text-green-800': tache.statut === 'Completed', 

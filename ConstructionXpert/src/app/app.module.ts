@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TacheDialogComponent } from './tache/tache-dialog/tache-dialog.component';
 import { ProjetDialogComponent } from './projet/projet-dialog/projet-dialog.component';
 import { RessourceDialogComponent } from './ressource/ressource-dialog/ressource-dialog.component';
+
+
+
 
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -49,6 +53,7 @@ import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.com
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
 
     // Angular Material
     MatDialogModule,
@@ -67,7 +72,7 @@ import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.com
     MatTooltipModule,
     MatSnackBarModule,
 
-
+  
     
   ],
   providers: [],
