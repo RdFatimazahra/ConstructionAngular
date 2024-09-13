@@ -8,14 +8,15 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatButtonModule } from '@angular/material/button';  
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
+import { LoginComponent } from './auth/login/login/login.component';
 
 const routes: Routes = [
-
-  { path: '', redirectTo: '/taches', pathMatch: 'full' },
+  { path: '', redirectTo: "/login", pathMatch: 'full' },
   { path: 'taches', component: ManageTachesComponent },
-  { path: 'projets', component: ManageProjetsComponent},
-  { path: 'admin-dashboard', component: AdminDashboardComponent},
-
+  { path: 'projets', component: ManageProjetsComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'dashboard', component: AdminDashboardComponent }, // Tableau de bord admin
+  { path: "login", component: LoginComponent },
 ];
 
 
