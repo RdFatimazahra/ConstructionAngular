@@ -1,1 +1,78 @@
-<p>ressource-dialog works!</p>
+<div class="container mt-5">
+  <h2 class="text-2xl font-semibold mb-4">Ajouter une Ressource</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="custom-form-container">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <!-- Nom -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="custom-form-field">
+              <mat-label>Nom</mat-label>
+              <mat-icon matPrefix>person</mat-icon>
+              <input matInput id="nom" formControlName="nom">
+              <mat-error *ngIf="form.get('nom')?.invalid && (form.get('nom')?.dirty || form.get('nom')?.touched)">
+                Nom est requis
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Type -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="custom-form-field">
+              <mat-label>Type</mat-label>
+              <mat-icon matPrefix>build</mat-icon>
+              <input matInput id="type" formControlName="type">
+              <mat-error *ngIf="form.get('type')?.invalid && (form.get('type')?.dirty || form.get('type')?.touched)">
+                Type est requis
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Quantité -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="custom-form-field">
+              <mat-label>Quantité</mat-label>
+              <mat-icon matPrefix>calculate</mat-icon>
+              <input matInput type="number" id="quantite" formControlName="quantite">
+              <mat-error *ngIf="form.get('quantite')?.invalid && (form.get('quantite')?.dirty || form.get('quantite')?.touched)">
+                Quantité est requise et doit être supérieure à 0
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Fournisseur -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="custom-form-field">
+              <mat-label>Fournisseur</mat-label>
+              <mat-icon matPrefix>local_shipping</mat-icon>
+              <input matInput id="fournisseur" formControlName="fournisseur">
+              <mat-error *ngIf="form.get('fournisseur')?.invalid && (form.get('fournisseur')?.dirty || form.get('fournisseur')?.touched)">
+                Fournisseur est requis
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- ID Tâche -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="custom-form-field">
+              <mat-label>ID Tâche</mat-label>
+              <mat-select id="idTache" formControlName="idTache">
+                <mat-option *ngFor="let tache of taches" [value]="tache.idTache">
+                  {{ tache.idTache }} - {{ tache.idTache }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('idTache')?.invalid && (form.get('idTache')?.dirty || form.get('idTache')?.touched)">
+                ID Tâche est requis
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>save</mat-icon> Ajouter Ressource
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

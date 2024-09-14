@@ -1,1 +1,41 @@
-<p>manage-ressources works!</p>
+<div class="container mt-5">
+  <h2 class="mb-4">Gestion des Ressources</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+      <tr>
+        <th>ID Ressource</th>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Quantité</th>
+        <th>Fournisseur</th>
+        <th>ID Tâche</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ressource of ressources">
+        <td>{{ ressource.idRessource }}</td>
+        <td>{{ ressource.nom }}</td>
+        <td>{{ ressource.type }}</td>
+        <td>{{ ressource.quantite }}</td>
+        <td>{{ ressource.fournisseur }}</td>
+        <td>{{ ressource.idTache }}</td>
+        <td>
+          <button (click)="deleteRessource(ressource.idRessource)" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <button class="btn btn-primary btn-sm ms-5">
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a routerLink="/new/:tacheId" class="btn btn-primary mt-4">
+    Ajouter Ressource
+  </a>
+</div>
