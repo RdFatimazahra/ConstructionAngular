@@ -68,17 +68,75 @@
           </div>
   
           <!-- Section Views -->
-          <div *ngIf="currentSection === 'projects'">
-            <app-manage-projets></app-manage-projets>  <!-- Create this component to manage projects -->
-          </div>
+          <!-- <div *ngIf="currentSection === 'projects'">
+            <app-manage-projets></app-manage-projets>  
+          </div> -->
+
+          <ng-container *ngIf="currentSection === 'projects'">
+            <app-manage-projets (projectSelected)="onProjectSelected($event)"></app-manage-projets>
+          </ng-container>
+          
+          <!-- Show Project Details -->
+          <ng-container *ngIf="currentSection === 'project-details'">
+            <app-project-details [project]="selectedProject"></app-project-details>
+          </ng-container>
+
+
+
+<!-- Section Views -->
+<ng-container *ngIf="currentSection === 'taches'">
+    <app-manage-taches (viewDetailsEvent)="onTaskDetails($event)"></app-manage-taches>
+  </ng-container>
   
-          <div *ngIf="currentSection === 'taches'">
-            <app-manage-taches></app-manage-taches>  <!-- Create this component to manage tasks -->
-          </div>
+<!-- Show Task Details -->
+<ng-container *ngIf="currentSection === 'task-details'">
+    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-gray-800">Task Details</h2>
+      <div class="space-y-4">
+        <p class="flex items-center border-b border-gray-200 pb-3">
+          <strong class="text-gray-600 font-medium w-1/3">ID:</strong>
+          <span class="text-gray-800">{{selectedTask?.idTache}}</span>
+        </p>
+        <p class="flex items-center border-b border-gray-200 pb-3">
+          <strong class="text-gray-600 font-medium w-1/3">Description:</strong>
+          <span class="text-gray-800">{{selectedTask?.description}}</span>
+        </p>
+        <p class="flex items-center border-b border-gray-200 pb-3">
+          <strong class="text-gray-600 font-medium w-1/3">Status:</strong>
+          <span class="px-3 py-1 rounded-full text-sm font-medium"
+                [ngClass]="{'bg-green-100 text-green-800': selectedTask?.statut === 'terminé', 
+                            'bg-yellow-100 text-yellow-800': selectedTask?.statut === 'en cours',
+                            'bg-red-100 text-red-800': selectedTask?.statut === 'à faire'}">
+            {{selectedTask?.statut}}
+          </span>
+        </p>
+        <p class="flex items-center border-b border-gray-200 pb-3">
+          <strong class="text-gray-600 font-medium w-1/3">Start Date:</strong>
+          <span class="text-gray-800">{{selectedTask?.dateDebut | date: 'mediumDate'}}</span>
+        </p>
+        <p class="flex items-center pb-3">
+          <strong class="text-gray-600 font-medium w-1/3">End Date:</strong>
+          <span class="text-gray-800">{{selectedTask?.dateFin | date: 'mediumDate'}}</span>
+        </p>
+      </div>
+      <div class="mt-8 flex justify-end">
+        <button (click)="currentSection = 'taches'" 
+                class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+          <i class="fas fa-arrow-left mr-2"></i> Back to Tasks
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+
 
           <div *ngIf="currentSection === 'resources'">
             <app-manage-ressources></app-manage-ressources> 
           </div>
+
+
+
+
         </div>
       </main>
     </div>

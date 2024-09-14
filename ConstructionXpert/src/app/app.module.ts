@@ -37,6 +37,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
+import { ProjectDetailsComponent } from './projet/project-details/project-details.component';
+import { TacheDetailsComponent } from './tache/tache-details/tache-details.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { AuthInterceptor } from './interceptors/interceptor';
 
@@ -51,8 +53,10 @@ import { AuthInterceptor } from './interceptors/interceptor';
     TacheDialogComponent,
     ProjetDialogComponent,
     RessourceDialogComponent,
+    ProjectDetailsComponent,
+    TacheDetailsComponent
     LoginComponent,
-  
+
   ],
   imports: [
     BrowserModule,
