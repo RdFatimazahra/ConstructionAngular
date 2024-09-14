@@ -20,6 +20,8 @@ export class TacheDialogComponent implements OnInit {
     // Add more statuses if needed
   ];
 
+  dateError: string | null = null;
+
   constructor(
     public dialogRef: MatDialogRef<TacheDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { tache: Tache, projetId: number },
@@ -37,6 +39,8 @@ export class TacheDialogComponent implements OnInit {
   }
 
   save(): void {
+
+    if (!this.dateError) {
     if (this.tache.idTache === 0) {
       // Create new tache
       console.log('Creating tache with projetId:', this.tache.idProjet); // Debugging statement
@@ -50,9 +54,26 @@ export class TacheDialogComponent implements OnInit {
         this.dialogRef.close(true);
       });
     }
+  } else {
+  
+    alert('Cannot save. Invalid date range.');
+  }
+    
   }
 
   cancel(): void {
     this.dialogRef.close();
+  }
+
+
+  validateDates() {
+    const startDate = new Date(this.tache.dateDebut);
+    const endDate = new Date(this.tache.dateFin);
+
+    if (startDate && endDate && endDate < startDate) {
+      this.dateError = 'End date must be after start date';
+    } else {
+      this.dateError = null;
+    }
   }
 }
