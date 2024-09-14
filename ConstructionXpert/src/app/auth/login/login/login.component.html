@@ -1,4 +1,4 @@
-<section class="vh-100">
+<!-- <section class="vh-100">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-7 text-black d-flex align-items-center justify-content-center">
@@ -51,4 +51,37 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+
+
+  <div class="login-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+          <mat-form-field appearance="outline">
+            <mat-label>Email address</mat-label>
+            <input matInput type="email" formControlName="email" required>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
