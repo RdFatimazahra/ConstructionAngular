@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +39,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ManageProjetsComponent } from './projet/manage-projet/manage-projet.component';
 import { ProjectDetailsComponent } from './projet/project-details/project-details.component';
 import { TacheDetailsComponent } from './tache/tache-details/tache-details.component';
+import { LoginComponent } from './auth/login/login/login.component';
+import { AuthInterceptor } from './interceptors/interceptor';
 
 @NgModule({
   declarations: [
@@ -50,6 +55,8 @@ import { TacheDetailsComponent } from './tache/tache-details/tache-details.compo
     RessourceDialogComponent,
     ProjectDetailsComponent,
     TacheDetailsComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -58,6 +65,8 @@ import { TacheDetailsComponent } from './tache/tache-details/tache-details.compo
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+
 
     // Angular Material
     MatDialogModule,
@@ -79,7 +88,17 @@ import { TacheDetailsComponent } from './tache/tache-details/tache-details.compo
   
     
   ],
-  providers: [],
+
+
+  providers: [
+
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+   
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
