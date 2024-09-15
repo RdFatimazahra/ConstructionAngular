@@ -68,8 +68,8 @@ constructor(
   private router: Router
 ) { }
 
-register(signRequest: any): Observable<Jwt> {
-  return this.http.post<Jwt>(BASE_URL + 'register', signRequest);
+ register(signRequest: any): Observable<Jwt> {
+  return this.http.post<Jwt>(`${BASE_URL}register`, signRequest);
 }
 
 login(loginRequest: any): Observable<Jwt> {
