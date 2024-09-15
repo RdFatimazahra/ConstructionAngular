@@ -13,6 +13,7 @@ import {ManageRessourcesComponent} from "./ressource/manage-ressources/manage-re
 import {RessourceDialogComponent} from "./ressource/ressource-dialog/ressource-dialog.component";
 
 import { LoginComponent } from './auth/login/login/login.component';
+import { RegisterComponent } from './auth/register/register/register.component';
 
     
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 
   { path: 'dashboard', component: AdminDashboardComponent }, // Tableau de bord admin
   { path: "login", component: LoginComponent },
+  { path: 'register', component: RegisterComponent},
 
 
 ];

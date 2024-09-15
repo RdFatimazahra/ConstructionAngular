@@ -68,6 +68,10 @@ constructor(
   private router: Router
 ) { }
 
+register(signRequest: any): Observable<Jwt> {
+  return this.http.post<Jwt>(BASE_URL + 'register', signRequest);
+}
+
 login(loginRequest: any): Observable<Jwt> {
   return this.http.post<Jwt>(`${BASE_URL}authenticate`, loginRequest).pipe(
     tap(response => {
@@ -89,7 +93,7 @@ isLoggedIn(): boolean {
 
 logout(): void {
   localStorage.removeItem(this.TOKEN_KEY);
-  this.router.navigate(['/login']);
+  this.router.navigate(['/home']);
 }
 
  }
