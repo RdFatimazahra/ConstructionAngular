@@ -5,6 +5,7 @@ import { ProjetService } from '../../services/projet.service';
 import { TacheService } from '../../services/tache.service';  // Assuming you have this service
 import { Projet } from 'src/app/models/projet.model';
 import { Tache } from 'src/app/models/tache.model';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -46,7 +47,8 @@ export class AdminDashboardComponent {
   constructor(
     private router: Router,
     private ProjetService: ProjetService,
-    private tacheService: TacheService
+    private tacheService: TacheService,
+    private authenticateService : AuthenticateService
    
   ) {}
 
@@ -55,6 +57,9 @@ export class AdminDashboardComponent {
     // this.loadTacheCount();
   }
 
+    onLogout(): void {
+      this.authenticateService.logout();
+    }
   // logout(): void {
   //   // Assuming you have an authService to handle logout
   //   this.authService.logout();
@@ -86,6 +91,7 @@ export class AdminDashboardComponent {
   //   );
   // }
 
+  
 
   showProjectDetails(project: Projet): void {
     console.log('Showing details for project:', project);
