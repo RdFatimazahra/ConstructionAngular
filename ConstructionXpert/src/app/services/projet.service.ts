@@ -87,6 +87,8 @@ export class ProjetService {
        .pipe(catchError(this.handleError));
    }
 
+   
+
 
 
   private handleError(error: HttpErrorResponse) {
