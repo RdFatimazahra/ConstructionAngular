@@ -17,7 +17,7 @@ import { RegisterComponent } from './auth/register/register/register.component';
 
     
 const routes: Routes = [
-  { path: '', redirectTo: "/login", pathMatch: 'full' },
+  { path: '', redirectTo: "/home", pathMatch: 'full' },
 
   { path: 'taches', component: ManageTachesComponent },
 
