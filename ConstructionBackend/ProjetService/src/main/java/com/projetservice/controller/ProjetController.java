@@ -6,6 +6,7 @@ import com.projetservice.dto.projetDto;
 import com.projetservice.model.FullProjectResponse;
 import com.projetservice.service.ProjetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,4 +72,17 @@ public class ProjetController {
         List<projetDto> allProjets = projetService.findProjectWithSortingDesc(field);
         return new APIResponse<>(allProjets.size() ,allProjets);
     }
+
+    @GetMapping("/pagination/{offset}/{pageSize}")
+    public APIResponse<List<projetDto>> getProjectsWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
+        // Fetch the paginated projects from the service
+        Page<projetDto> projectWithPagination = projetService.findProjetsWithPagination(offset, pageSize);
+
+        // Extract the content (List<ProjetDto>) from the Page object
+        List<projetDto> projets = projectWithPagination.getContent();
+
+        // Return the API response with total number of elements and the paginated content
+        return new APIResponse<>(projectWithPagination.getSize(), projets);
+    }
+
 }

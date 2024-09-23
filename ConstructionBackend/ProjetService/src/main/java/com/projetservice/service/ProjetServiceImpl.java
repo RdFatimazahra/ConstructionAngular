@@ -8,11 +8,13 @@ import com.projetservice.model.Taches;
 import com.projetservice.model.Projet;
 import com.projetservice.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.PageRequest;
 
 @Service
 public class ProjetServiceImpl implements ProjetService {
@@ -108,6 +110,17 @@ public class ProjetServiceImpl implements ProjetService {
         return projets.stream()
                 .map(projetMapper::projetToProjetDto)
                 .collect(Collectors.toList());
+    }
+
+
+
+    // Pagination method in the service class
+    public Page<projetDto> findProjetsWithPagination(int offset, int pageSize) {
+        // Fetch the paginated data from the repository
+        Page<Projet> projetsPage = projetRepository.findAll(PageRequest.of(offset, pageSize));
+
+        // Convert the Page<Projet> to Page<ProjetDto> using map()
+        return projetsPage.map(projetMapper::projetToProjetDto);
     }
 
 }
