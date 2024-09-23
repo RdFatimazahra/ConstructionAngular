@@ -1,1 +1,48 @@
-<p>tache-dialog works!</p>
+<h1 mat-dialog-title>{{ tache.idTache === 0 ? 'Create Tache' : 'Edit Tache' }}</h1>
+
+<div mat-dialog-content>
+  <!-- Description Field -->
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="tache.description" placeholder="Enter task description">
+  </mat-form-field>
+
+  <!-- Status Field -->
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="tache.statut" placeholder="Select status">
+      <mat-option *ngFor="let status of statuses" [value]="status.value">
+        {{ status.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<!-- Start Date Field -->
+<mat-form-field appearance="fill">
+    <mat-label>Date Debut</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="tache.dateDebut" name="dateDebut" placeholder="Select start date" (ngModelChange)="validateDates()">
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  <!-- End Date Field -->
+  <mat-form-field appearance="fill">
+    <mat-label>Date Fin</mat-label>
+    <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="tache.dateFin" name="dateFin" placeholder="Select end date" (ngModelChange)="validateDates()">
+    <mat-datepicker #pickerEnd></mat-datepicker>
+    <mat-error *ngIf="dateError">{{ dateError }}</mat-error> <!-- Display error -->
+  </mat-form-field>
+  
+
+  <!-- Project Selection Field -->
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <mat-select [(ngModel)]="tache.idProjet" placeholder="Select project">
+      <mat-option *ngFor="let projet of projets" [value]="projet.idProjet">{{ projet.nomProjet }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>

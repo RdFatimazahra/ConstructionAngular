@@ -1,1 +1,91 @@
-<p>manage-taches works!</p>
+
+<div class="bg-white rounded-3xl shadow-xl p-8 mb-10">
+
+     <!-- Search and Filter Box -->
+  <div class="flex items-center mb-6 space-x-4">
+    <!-- Search Box -->
+    <div class="flex-1">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        (input)="applyFilters()" 
+        placeholder=" Search tasks or projects... " 
+        class="border rounded-full p-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+    </div>
+    
+    <!-- Filters -->
+    <div>
+      <label for="statusFilter" class="block text-gray-700 sr-only">Filter by Status:</label>
+      <select 
+        id="statusFilter" 
+        [(ngModel)]="selectedStatus" 
+        (change)="applyFilters()" 
+        class="border rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+        <option value="">All</option>
+        <option *ngFor="let status of statusOptions" [value]="status.value">{{status.label}}</option>
+      </select>
+    </div>
+  </div>
+    
+
+
+  
+    <button 
+      (click)="openDialog()" 
+      class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105"
+    >
+      Create New Tache
+    </button>
+    
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tl-2xl">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Projet</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Description</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tr-2xl">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tache of filteredTaches" class="bg-white">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ tache.idTache }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{projects[tache.idProjet] || 'Unknown'}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ tache.description }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <span class="px-2 inline-flex text-xs leading-5  rounded-full" 
+                    [ngClass]="{'bg-green-100 text-green-800': tache.statut === 'terminé', 
+                                'bg-yellow-100 text-yellow-800': tache.statut === 'en cours',
+                                'bg-red-100 text-red-800': tache.statut === 'à faire'}">
+                {{ tache.statut }}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <!-- Edit Button -->
+                <button (click)="openDialog(tache)" 
+                        class="bg-purple-500 text-white py-1 px-2 rounded-lg hover:bg-purple-600 transition duration-300 mr-2 text-xs">
+                        <fa-icon [icon]="faEdit" class="mr-1"></fa-icon> Edit
+                </button>
+                
+                <!-- Delete Button -->
+                <button (click)="deleteTache(tache.idTache)" 
+                        class="bg-pink-500 text-white py-1 px-2 rounded-lg hover:bg-pink-600 transition duration-300 mr-2 text-xs">
+                        <fa-icon [icon]="faTrashAlt" class="mr-1"></fa-icon> Delete
+                </button>
+                
+                <!-- View Details Button -->
+                <button (click)="viewDetails(tache.idTache)" 
+                        class="bg-blue-500 text-white py-1 px-2 rounded-lg hover:bg-blue-600 transition duration-300 text-xs">
+                        <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon> Details
+                </button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="errorMessage" class="text-red-600 mt-4 font-bold">{{ errorMessage }}</div>
+  </div>
+  

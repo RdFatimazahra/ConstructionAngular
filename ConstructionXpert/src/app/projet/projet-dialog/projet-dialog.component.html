@@ -1,1 +1,40 @@
-<p>projet-dialog works!</p>
+<h1 mat-dialog-title>{{ projet.idProjet === 0 ? 'Create Project' : 'Edit Project' }}</h1>
+
+<div mat-dialog-content>
+  <!-- Nom Projet -->
+  <mat-form-field appearance="fill">
+    <mat-label>Nom Projet</mat-label>
+    <input matInput [(ngModel)]="projet.nomProjet">
+  </mat-form-field>
+
+  <!-- Description -->
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="projet.description"></textarea>
+  </mat-form-field>
+
+  <!-- Date Début -->
+  <mat-form-field appearance="fill">
+    <mat-label>Date Début</mat-label>
+    <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="projet.dateDebut">
+    <mat-datepicker #pickerDebut></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Date Fin -->
+  <mat-form-field appearance="fill">
+    <mat-label>Date Fin</mat-label>
+    <input matInput [matDatepicker]="pickerFin" [(ngModel)]="projet.dateFin">
+    <mat-datepicker #pickerFin></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Budget -->
+  <mat-form-field appearance="fill">
+    <mat-label>Budget</mat-label>
+    <input matInput type="number" [(ngModel)]="projet.budget">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>
