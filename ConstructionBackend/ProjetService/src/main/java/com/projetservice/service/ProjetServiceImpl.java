@@ -8,6 +8,7 @@ import com.projetservice.model.Taches;
 import com.projetservice.model.Projet;
 import com.projetservice.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -93,6 +94,21 @@ public class ProjetServiceImpl implements ProjetService {
                 .build();
     }
 
+    //Sorting ASC Method:
+    public List<projetDto> findProjectWithSortingAsc(String field) {
+      List<Projet> projets=  projetRepository.findAll(Sort.by(Sort.Direction.ASC,field));
+        return projets.stream()
+                .map(projetMapper::projetToProjetDto)
+                .collect(Collectors.toList());
+    }
+
+    //Sorting ASC Method:
+    public List<projetDto> findProjectWithSortingDesc(String field) {
+        List<Projet> projets=  projetRepository.findAll(Sort.by(Sort.Direction.DESC,field));
+        return projets.stream()
+                .map(projetMapper::projetToProjetDto)
+                .collect(Collectors.toList());
+    }
 
 }
 

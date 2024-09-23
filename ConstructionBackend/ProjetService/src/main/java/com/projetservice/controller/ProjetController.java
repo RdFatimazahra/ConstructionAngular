@@ -1,6 +1,7 @@
 package com.projetservice.controller;
 
 import com.projetservice.client.TacheClient;
+import com.projetservice.dto.APIResponse;
 import com.projetservice.dto.projetDto;
 import com.projetservice.model.FullProjectResponse;
 import com.projetservice.service.ProjetService;
@@ -55,5 +56,19 @@ public class ProjetController {
 //        tacheClient.deleteTachesByProjetId(id);
         projetService.deleteProjet(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //SortingAsc
+    @GetMapping("/sortA/{field}")
+    public APIResponse<List<projetDto>> getProjectWithSortingAsc(@PathVariable String field) {
+     List<projetDto> allProjets = projetService.findProjectWithSortingAsc(field);
+     return new APIResponse<>(allProjets.size() ,allProjets);
+
+    }
+    //SortingDesc
+    @GetMapping("/sortD/{field}")
+    public APIResponse<List<projetDto>> getProjectWithSortingDesc(@PathVariable String field) {
+        List<projetDto> allProjets = projetService.findProjectWithSortingDesc(field);
+        return new APIResponse<>(allProjets.size() ,allProjets);
     }
 }
