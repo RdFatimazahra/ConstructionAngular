@@ -9,6 +9,8 @@ import com.tacheservice.model.Ressources;
 import com.tacheservice.model.Tache;
 import com.tacheservice.repository.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.data.domain.Page;
@@ -132,6 +134,20 @@ public class TacheServiceImpl implements TacheService {
         return tacheRepository.findAll(pageable)
                 .map(tacheMapper::tacheToTacheDto);
     }
+
+    @Override
+    public Page<TacheDto> getTachesSortedByFieldAsc(String field, Pageable pageable) {
+        Page<Tache> sortedTaches = tacheRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(field).ascending()));
+        return sortedTaches.map(tacheMapper::tacheToTacheDto);
+    }
+
+    @Override
+    public Page<TacheDto> getTachesSortedByFieldDesc(String field, Pageable pageable) {
+        Page<Tache> sortedTaches = tacheRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(field).descending()));
+        return sortedTaches.map(tacheMapper::tacheToTacheDto);
+    }
+
+
 
 
 

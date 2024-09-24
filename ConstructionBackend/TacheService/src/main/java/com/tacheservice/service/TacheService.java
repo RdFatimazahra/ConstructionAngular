@@ -22,4 +22,6 @@ public interface TacheService {
     FullTachesResponse tachWithRessources(int id);
     public void deleteTachesByProjetId(int idProjet);
     Page<TacheDto> getAllTachesWithPagination(Pageable pageable);
+    Page<TacheDto> getTachesSortedByFieldAsc(String field, Pageable pageable);
+    Page<TacheDto> getTachesSortedByFieldDesc(String field, Pageable pageable);
 }
