@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, Observable, throwError } from 'rxjs';
 import { Projet } from '../models/projet.model';
 import { AuthenticateService } from './authenticate.service';
+import { APIResponse } from '../models/api-response.model';
 
 
 
@@ -87,7 +88,23 @@ export class ProjetService {
        .pipe(catchError(this.handleError));
    }
 
-   
+
+ 
+
+   // Sorting Ascending
+   getProjectsWithSortingAsc(field: string): Observable<Projet[]> {
+    return this.http.get<Projet[]>(`${this.apiUrl}/sortA/${field}`);
+  }
+
+  // Sorting Descending
+  getProjectsWithSortingDesc(field: string): Observable<Projet[]> {
+    return this.http.get<Projet[]>(`${this.apiUrl}/sortD/${field}`);
+  }
+
+   // Pagination method to fetch paginated projects
+  getProjectsWithPagination(offset: number, pageSize: number): Observable<APIResponse<Projet[]>> {
+    return this.http.get<APIResponse<Projet[]>>(`${this.apiUrl}/pagination/${offset}/${pageSize}`);
+  }
 
 
 

@@ -1,16 +1,30 @@
 <!-- Projet Management -->
 <div class="bg-white rounded-3xl shadow-xl p-8 mb-10">
 
-  <!-- Ascending Sort Button -->
-  <button class="test" (click)="sortedProjectAsc()" class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
-    Sort Asc
+
+   <!-- Ascending Sort Button -->
+   <button (click)="sortProjectsAsc('nomProjet')" class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
+    Sort by Name Asc
   </button>
 
   <!-- Descending Sort Button -->
+  <button (click)="sortProjectsDesc('nomProjet')" class="ml-4 mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
+    Sort by Name Desc
+  </button>
+  <!-- Ascending Sort Button 
+  <button class="test" (click)="sortedProjectAsc()" class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
+    Sort Asc
+  </button>-->
+
+  <!-- Descending Sort Button
   <button class="test" (click)="sortedProjectDesc()" class="ml-4 mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
     Sort Desc
-  </button>
+  </button>--> 
 
+  <!-- Sorting 
+  <button (click)="sortProjectsAsc('nomProjet')" class="ml-4 mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">Sort by Name Asc</button>
+  <button (click)="sortProjectsDesc('nomProjet')" class="ml-4 mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">Sort by Name Desc</button>
+-->
   <!-- Search Bar -->
   <input 
     type="text" 
@@ -69,4 +83,7 @@
     </table>
   </div>
   <div *ngIf="errorMessage" class="text-red-600 mt-4 font-bold">{{ errorMessage }}</div>
+  <!-- Paginator 
+  <mat-paginator [length]="totalElements" [pageSize]="pageSize" (page)="onPageChange($event)">
+  </mat-paginator>-->
 </div>

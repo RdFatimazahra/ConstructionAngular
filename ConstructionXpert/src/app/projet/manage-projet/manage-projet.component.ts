@@ -14,6 +14,10 @@ export class ManageProjetsComponent {
   projets: Projet[] = [];
   errorMessage: string | null = null;
 
+  totalRecords: number = 0;
+  pageSize: number = 5; // Nombre d'éléments par page
+  currentPage: number = 1;
+
   searchTerm: string = '';
 
 
@@ -26,15 +30,95 @@ export class ManageProjetsComponent {
   constructor(private projetService: ProjetService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.loadProjets();
+   this.loadProjets();
+   //this.loadProjetsWithPagination();
   }
 
+
+   // Load paginated projects
+   /*loadProjetsWithPagination(): void {
+    this.projetService.getProjectsWithPagination(this.currentPage, this.pageSize).subscribe(
+      (data: any) => {
+        console.log("Data received:", data);  // Log data
+        this.projets = Array.isArray(data?.content) ? data.content : [];
+        this.totalElements = data?.totalElements || 0;
+      },
+      error => this.errorMessage = 'Error loading paginated projets'
+    );
+  }
+  
+  
+
+  // Sorting Ascending
+  sortProjectsAsc(field: string): void {
+    this.projetService.getProjectsWithSortingAsc(field).subscribe(
+      (data: Projet[]) => this.projets = data,
+      error => this.errorMessage = 'Error sorting projets (asc)'
+    );
+  }
+
+  // Sorting Descending
+  sortProjectsDesc(field: string): void {
+    this.projetService.getProjectsWithSortingDesc(field).subscribe(
+      (data: Projet[]) => this.projets = data,
+      error => this.errorMessage = 'Error sorting projets (desc)'
+    );
+  }
+
+  // Handle page change
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadProjetsWithPagination();
+  } */
+
+
+  // Load all projects
   loadProjets(): void {
     this.projetService.getAllProject().subscribe(
-      (data: Projet[]) => this.projets = data,
+      (data: Projet[]) => {
+        if (Array.isArray(data)) {  // Ensure data is an array
+          this.projets = data;
+        } else {
+          this.projets = [];  // Fallback to an empty array if data is not an array
+          console.error('API response is not an array');
+        }
+      },
       error => this.errorMessage = 'Error loading projets'
     );
   }
+
+  // Sort Ascending by field
+sortProjectsAsc(field: string): void {
+  this.projetService.getProjectsWithSortingAsc(field).subscribe(
+    (data: any) => {
+      console.log('API response (ascending):', data); // Log the API response
+      if (data && Array.isArray(data.response)) {
+        this.projets = data.response; // Access the array from 'response'
+      } else {
+        this.projets = [];
+        console.error('Sorted API response is not an array');
+      }
+    },
+    error => this.errorMessage = 'Error sorting projets (asc)'
+  );
+}
+
+// Sort Descending by field
+sortProjectsDesc(field: string): void {
+  this.projetService.getProjectsWithSortingDesc(field).subscribe(
+    (data: any) => {
+      console.log('API response (descending):', data); // Log the API response
+      if (data && Array.isArray(data.response)) {
+        this.projets = data.response; // Access the array from 'response'
+      } else {
+        this.projets = [];
+        console.error('Sorted API response is not an array');
+      }
+    },
+    error => this.errorMessage = 'Error sorting projets (desc)'
+  );
+}
 
   openDialog(projet: Projet | null = null): void {
     const dialogRef = this.dialog.open(ProjetDialogComponent, {
@@ -65,7 +149,7 @@ export class ManageProjetsComponent {
 
   
 
-  
+  //Sort frontend
 
   sortedProjectAsc() {
     this.projets.sort((a, b) => a.nomProjet.localeCompare(b.nomProjet));
