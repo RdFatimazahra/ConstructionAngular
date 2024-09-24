@@ -87,5 +87,20 @@ public class TacheController {
 
 //    GET http://localhost:8083/api/taches/pagination?page=1&size=5
 
+
+    @GetMapping("/sort/asc")
+    public ResponseEntity<Page<TacheDto>> getTachesSortedAsc(@RequestParam String field, Pageable pageable) {
+        Page<TacheDto> sortedTaches = tacheService.getTachesSortedByFieldAsc(field, pageable);
+        return ResponseEntity.ok(sortedTaches);
+    }
+//    http://localhost:8083/api/taches/sort/asc?field=description
+
+    @GetMapping("/sort/desc")
+    public ResponseEntity<Page<TacheDto>> getTachesSortedDesc(@RequestParam String field, Pageable pageable) {
+        Page<TacheDto> sortedTaches = tacheService.getTachesSortedByFieldDesc(field, pageable);
+        return ResponseEntity.ok(sortedTaches);
+    }
+//    http://localhost:8083/api/taches/sort/desc?field=description
+
 }
 
