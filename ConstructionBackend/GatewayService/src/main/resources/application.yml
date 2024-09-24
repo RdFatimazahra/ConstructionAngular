@@ -15,8 +15,8 @@ spring:
           uri: http://localhost:8083/
           predicates:
             - Path=/api/taches/**
-          filters:
-            - AuthenticationFilter
+#          filters:
+#            - AuthenticationFilter
         - id: ressource-service
           uri: http://localhost:8082/
           predicates:

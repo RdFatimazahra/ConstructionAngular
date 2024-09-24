@@ -11,6 +11,8 @@ import com.tacheservice.repository.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -124,4 +126,13 @@ public class TacheServiceImpl implements TacheService {
             tacheRepository.deleteAll(taches);
         }
     }
+
+    @Override
+    public Page<TacheDto> getAllTachesWithPagination(Pageable pageable) {
+        return tacheRepository.findAll(pageable)
+                .map(tacheMapper::tacheToTacheDto);
+    }
+
+
+
 }

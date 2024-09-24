@@ -7,6 +7,9 @@ import com.tacheservice.service.TacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
@@ -74,6 +77,15 @@ public class TacheController {
     public void deleteTachesByProjetId(@PathVariable int idProjet) {
         tacheService.deleteTachesByProjetId(idProjet);
     }
+
+
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<TacheDto>> getAllTachespg(Pageable pageable) {
+        Page<TacheDto> taches = tacheService.getAllTachesWithPagination(pageable);
+        return ResponseEntity.ok(taches);
+    }
+
+//    GET http://localhost:8083/api/taches/pagination?page=1&size=5
 
 }
 

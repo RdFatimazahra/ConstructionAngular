@@ -2,6 +2,8 @@ package com.tacheservice.service;
 
 import com.tacheservice.dto.TacheDto;
 import com.tacheservice.model.FullTachesResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,5 +21,5 @@ public interface TacheService {
     List<TacheDto> getTachesByProjet(int idProjet);
     FullTachesResponse tachWithRessources(int id);
     public void deleteTachesByProjetId(int idProjet);
-
+    Page<TacheDto> getAllTachesWithPagination(Pageable pageable);
 }
