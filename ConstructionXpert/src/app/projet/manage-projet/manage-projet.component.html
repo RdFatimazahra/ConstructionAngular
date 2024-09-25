@@ -1,56 +1,72 @@
 <!-- Projet Management -->
 <div class="bg-white rounded-3xl shadow-xl p-8 mb-10">
-    <button 
-      (click)="openDialog()" 
-      class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105"
-    >
-      Create New Projet
-    </button>
-    
-    <div class="overflow-x-auto">
-      <table class="w-full">
-        <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tl-2xl">ID</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Nom Projet</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Date Début</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Date Fin</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Budget</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tr-2xl">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let projet of projets" class="bg-white">
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ projet.idProjet }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.nomProjet }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.dateDebut |  date: 'mediumDate' }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.dateFin | date: 'mediumDate' }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.budget}}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <div class="flex space-x-2">
-                <!-- Edit Button -->
-                <button (click)="openDialog(projet)" class="bg-purple-500 text-white py-1 px-2 rounded-lg hover:bg-purple-600 transition duration-300 text-xs flex items-center justify-center">
-                  <fa-icon [icon]="faEdit" class="mr-1"></fa-icon>
-                  <span>Edit</span>
-                </button>
-            
-                <!-- Delete Button -->
-                <button (click)="deleteProjet(projet.idProjet)" class="bg-pink-500 text-white py-1 px-2 rounded-lg hover:bg-pink-600 transition duration-300 text-xs flex items-center justify-center">
-                  <fa-icon [icon]="faTrashAlt" class="mr-1"></fa-icon>
-                  <span>Delete</span>
-                </button>
-            
-                <!-- Show Details Button -->
-                <button (click)="showDetails(projet)" class="bg-blue-500 text-white py-1 px-2 rounded-lg hover:bg-blue-600 transition duration-300 text-xs flex items-center justify-center">
-                  <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon>
-                  <span>Details</span>
-                </button>
-              </div>
-            </td>
-            
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div *ngIf="errorMessage" class="text-red-600 mt-4 font-bold">{{ errorMessage }}</div>
+
+  <!-- Ascending Sort Button -->
+  <button class="test" (click)="sortedProjectAsc()" class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
+    Sort Asc
+  </button>
+
+  <!-- Descending Sort Button -->
+  <button class="test" (click)="sortedProjectDesc()" class="ml-4 mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
+    Sort Desc
+  </button>
+
+  <!-- Search Bar -->
+  <input 
+    type="text" 
+    [(ngModel)]="searchTerm" 
+    placeholder="Search Projet..." 
+    class="mb-6 w-full px-4 py-2 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  />
+
+  <!-- Create New Projet Button -->
+  <button 
+    (click)="openDialog()" 
+    class="mb-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105"
+  >
+    Create New Projet
+  </button>
+  
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tl-2xl">ID</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Nom Projet</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Date Début</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Date Fin</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Budget</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider rounded-tr-2xl">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projet of filteredProjets()" class="bg-white">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ projet.idProjet }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.nomProjet }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.dateDebut |  date: 'mediumDate' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.dateFin | date: 'mediumDate' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ projet.budget }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <div class="flex space-x-2">
+              <button (click)="openDialog(projet)" class="bg-purple-500 text-white py-1 px-2 rounded-lg hover:bg-purple-600 transition duration-300 text-xs flex items-center justify-center">
+                <fa-icon [icon]="faEdit" class="mr-1"></fa-icon>
+                <span>Edit</span>
+              </button>
+          
+              <button (click)="deleteProjet(projet.idProjet)" class="bg-pink-500 text-white py-1 px-2 rounded-lg hover:bg-pink-600 transition duration-300 text-xs flex items-center justify-center">
+                <fa-icon [icon]="faTrashAlt" class="mr-1"></fa-icon>
+                <span>Delete</span>
+              </button>
+          
+              <button (click)="showDetails(projet)" class="bg-blue-500 text-white py-1 px-2 rounded-lg hover:bg-blue-600 transition duration-300 text-xs flex items-center justify-center">
+                <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon>
+                <span>Details</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="errorMessage" class="text-red-600 mt-4 font-bold">{{ errorMessage }}</div>
 </div>

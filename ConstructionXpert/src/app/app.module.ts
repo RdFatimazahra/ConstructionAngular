@@ -41,6 +41,7 @@ import { ProjectDetailsComponent } from './projet/project-details/project-detail
 import { TacheDetailsComponent } from './tache/tache-details/tache-details.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { AuthInterceptor } from './interceptors/interceptor';
+import { RegisterComponent } from './auth/register/register/register.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AuthInterceptor } from './interceptors/interceptor';
     RessourceDialogComponent,
     ProjectDetailsComponent,
     TacheDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
 
   ],
   imports: [

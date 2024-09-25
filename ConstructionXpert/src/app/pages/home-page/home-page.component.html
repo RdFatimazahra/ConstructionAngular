@@ -1,1 +1,377 @@
-<p>home-page works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConstructionXpert - Advanced Construction Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .btn-gradient {
+            background-size: 200% auto;
+            transition: 0.5s;
+        }
+        .btn-gradient:hover {
+            background-position: right center;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a routerLink="home" class="items-center px-1 pt-1 text-xl font-medium">
+                            ConstructionXpert
+                        </a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#" class="border-pink-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Home
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Services
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Projects
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+
+                    <!-- Login Button -->
+                    <a routerLink="/login" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-full group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 btn-gradient">
+                        <span class="relative px-3 py-1 transition-all ease-in duration-75 bg-transparent rounded-full">
+                            Login
+                        </span>
+                    </a>
+                
+                </div>
+                
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="bg-pink-50 border-pink-500 text-pink-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Services</a>
+                <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Projects</a>
+                <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+                <a href="#" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 text-white parallax" style="background-image: url('https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl animate-fadeInUp">Building Dreams, Managing Reality</h1>
+            <p class="mt-6 text-xl max-w-3xl animate-fadeInUp" style="animation-delay: 0.2s;">Streamline your construction projects with our advanced site management tools. Experience the future of construction management today.</p>
+            <div class="mt-10 animate-fadeInUp" style="animation-delay: 0.4s;">
+                <a routerLink="/login" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-full group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 btn-gradient">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-full">
+                        Get Started
+                    </span>
+                </a>
+                <a href="#" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-purple-600 rounded-full group bg-gradient-to-r from-purple-200 to-pink-200 hover:text-white btn-gradient ml-4">
+                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-full group-hover:bg-opacity-0">
+                        Learn More
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-pink-600 font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    A better way to manage construction
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    ConstructionXpert offers a comprehensive suite of tools designed to streamline your projects from start to finish.
+                </p>
+            </div>
+
+            <div class="mt-20">
+                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <div class="animate-slideInLeft">
+                        <dt>
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <p class="mt-5 text-lg leading-6 font-medium text-gray-900">Project Management</p>
+                        </dt>
+                        <dd class="mt-2 text-base text-gray-500">
+                            Keep all your projects organized and on track with our intuitive project management tools.
+                        </dd>
+                    </div>
+
+                    <div class="animate-slideInRight">
+                        <dt>
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                            </div>
+                            <p class="mt-5 text-lg leading-6 font-medium text-gray-900">Real-time Analytics</p>
+                        </dt>
+                        <dd class="mt-2 text-base text-gray-500">
+                            Make data-driven decisions with our comprehensive analytics and reporting features.
+                        </dd>
+                    </div>
+
+                    <div class="animate-slideInLeft">
+                        <dt>
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <p class="mt-5 text-lg leading-6 font-medium text-gray-900">Team Collaboration</p>
+                        </dt>
+                        <dd class="mt-2 text-base text-gray-500">
+                            Foster seamless communication between all project stakeholders with our collaboration tools.
+                        </dd>
+                    </div>
+
+                    <div class="animate-slideInRight">
+                        <dt>
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </div>
+                            <p class="mt-5 text-lg leading-6 font-medium text-gray-900">Enhanced Security</p>
+                        </dt>
+                        <dd class="mt-2 text-base text-gray-500">
+                            Protect your sensitive project data with our state-of-the-art security measures.
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-gray-100 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">What Our Clients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white shadow-lg rounded-lg p-6 animate-fadeInUp">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full" src="https://img.freepik.com/free-photo/worldface-spanish-guy-white-background_53876-137665.jpg?ga=GA1.1.1707980714.1717492988&semt=ais_hybrid" alt="Client">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold">John Doe</h4>
+                            <p class="text-gray-600">Project Manager, XYZ Construction</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"ConstructionXpert has revolutionized the way we manage our projects. The real-time analytics have been a game-changer for our decision-making process."</p>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full" src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1726272000&semt=ais_hybrid" alt="Client">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold">Jane Smith</h4>
+                            <p class="text-gray-600">CEO, ABC Builders</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The team collaboration features have improved our communication tenfold. We're more efficient and aligned than ever before."</p>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 animate-fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full" src="https://img.freepik.com/free-photo/portrait-modern-man_23-2147960990.jpg?ga=GA1.1.1707980714.1717492988&semt=ais_hybrid" alt="Client">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold">Mike Johnson</h4>
+                            <p class="text-gray-600">Site Supervisor, DEF Contractors</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The mobile app has made it incredibly easy to manage projects on-the-go. I can't imagine going back to our old system."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gradient-to-r from-purple-500 to-pink-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold mb-4">Ready to Transform Your Construction Management?</h2>
+            <p class="text-xl mb-8">Join thousands of satisfied customers who have streamlined their projects with ConstructionXpert.</p>
+            <a href="#" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-pink-600 rounded-full group bg-gradient-to-r from-purple-200 to-pink-200 hover:text-white btn-gradient">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-full group-hover:bg-opacity-0">
+                    Start Your Free Trial
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">ConstructionXpert</h3>
+                    <p class="text-gray-400">Revolutionizing construction management for businesses worldwide.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Projects</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-2">Stay updated with our latest features and industry insights.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Enter your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none flex-grow">
+                        <button type="submit" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-r-md group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 btn-gradient">
+                            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-transparent rounded-r-md">
+                                Subscribe
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 ConstructionXpert. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-md');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Mobile menu toggle
+        document.querySelector('button[aria-controls="mobile-menu"]').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

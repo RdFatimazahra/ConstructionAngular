@@ -14,6 +14,9 @@ export class ManageProjetsComponent {
   projets: Projet[] = [];
   errorMessage: string | null = null;
 
+  searchTerm: string = '';
+
+
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faInfoCircle = faInfoCircle;
@@ -59,4 +62,25 @@ export class ManageProjetsComponent {
     console.log('Selected Project:', projet);
     this.projectSelected.emit(projet);
   }
+
+  
+
+  
+
+  sortedProjectAsc() {
+    this.projets.sort((a, b) => a.nomProjet.localeCompare(b.nomProjet));
+  }
+  
+  sortedProjectDesc() {
+    this.projets.sort((a, b) => b.nomProjet.localeCompare(a.nomProjet));
+  }
+  
+
+  filteredProjets(): Projet[] {
+    return this.projets.filter(projets=>
+    projets.nomProjet.toLowerCase().includes(this.searchTerm.toLowerCase())
+
+    );
+  }
+  
 }
