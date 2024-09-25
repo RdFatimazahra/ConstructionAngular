@@ -55,7 +55,7 @@ import { RegisterComponent } from './auth/register/register/register.component';
     ProjectDetailsComponent,
     TacheDetailsComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
 
   ],
   imports: [

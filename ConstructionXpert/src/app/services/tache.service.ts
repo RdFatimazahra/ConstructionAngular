@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse , HttpParams} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Tache } from '../models/tache.model';
+import { Page } from '../models/page.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,18 @@ export class TacheService {
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
+
+  getPaginatedTaches(page: number, size: number): Observable<Page<Tache>> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<Page<Tache>>(`${this.apiUrl}/pagination`, { params })
+      .pipe(catchError(this.handleError));
+  }
+
+  // getSortedTaches(field: string, direction: 'asc' | 'desc', page: number, size: number): Observable<Page<Tache>> {
+  //   const params = new HttpParams().set('page', page).set('size', size);
+  //   return this.http.get<Page<Tache>>(`${this.apiUrl}/sort/${direction}?field=${field}`, { params })
+  //     .pipe(catchError(this.handleError));
+  // }
+
+
 }
