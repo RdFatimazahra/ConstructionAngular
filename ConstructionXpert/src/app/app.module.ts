@@ -54,8 +54,8 @@ import { AuthInterceptor } from './interceptors/interceptor';
     ProjetDialogComponent,
     RessourceDialogComponent,
     ProjectDetailsComponent,
-    TacheDetailsComponent
-    LoginComponent,
+    TacheDetailsComponent,
+    LoginComponent
 
   ],
   imports: [
