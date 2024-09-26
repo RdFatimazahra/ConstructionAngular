@@ -89,16 +89,16 @@ public class RessourceServiceImpl implements RessourceService {
         return ressourceRepository.findAll(pageable)
                 .map(ressourceMapper::ressourceToRessourceDto);
     }
-//
-//    @Override
-//    public Page<RessourceDto> getRessSortedByFieldAsc(String field, Pageable pageable) {
-//        Page<ressources> sortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(field).ascending()));
-//        return sortedRess.map(ressourceMapper::ressourceToRessourceDto);
-//    }
-//
-//    @Override
-//    public Page<RessourceDto> getRessSortedByFieldDesc(String field, Pageable pageable) {
-//        Page<ressources> seortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),Sort.by(field).ascending()));
-//        return seortedRess.map(ressourceMapper::ressourceToRessourceDto);
-//    }
+
+    @Override
+    public Page<RessourceDto> getRessSortedByFieldAsc(String field, Pageable pageable) {
+        Page<ressources> sortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(field).ascending()));
+        return sortedRess.map(ressourceMapper::ressourceToRessourceDto);
+    }
+
+    @Override
+    public Page<RessourceDto> getRessSortedByFieldDesc(String field, Pageable pageable) {
+        Page<ressources> seortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),Sort.by(field).ascending()));
+        return seortedRess.map(ressourceMapper::ressourceToRessourceDto);
+    }
 }

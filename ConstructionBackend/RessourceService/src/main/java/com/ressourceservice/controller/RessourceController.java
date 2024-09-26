@@ -3,6 +3,9 @@ package com.ressourceservice.controller;
 import com.ressourceservice.Dto.RessourceDto;
 import com.ressourceservice.service.RessourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +58,22 @@ public class RessourceController {
     public ResponseEntity<Void> deleteRessource(@PathVariable int id) {
         ressourceService.deleteRessource(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/pagination/all")
+    public ResponseEntity<Page<RessourceDto>> getAllRessourcesWithPagination(Pageable pageable) {
+        Page<RessourceDto> ress = ressourceService.getAllRessWithPagination(pageable);
+        return ResponseEntity.ok(ress);
+    }
+
+    @GetMapping("/sort/asc")
+    public ResponseEntity<Page<RessourceDto>> getRessourcesSortedByFieldAsc(@RequestParam String field, Pageable pageable) {
+        Page<RessourceDto> sorted = ressourceService.getRessSortedByFieldAsc(field, pageable);
+        return ResponseEntity.ok(sorted);
+    }
+
+    @GetMapping("/sort/desc")
+    public ResponseEntity<Page<RessourceDto>> getRessourcesSortedByFieldDesc(@RequestParam String field, Pageable pageable) {
+        Page<RessourceDto> ress = ressourceService.getRessSortedByFieldDesc(field, pageable);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(ress);
     }
 }
