@@ -5,6 +5,10 @@ import com.ressourceservice.mapper.RessourceMapper;
 import com.ressourceservice.model.ressources;
 import com.ressourceservice.repository.RessourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -78,4 +82,23 @@ public class RessourceServiceImpl implements RessourceService {
                 .orElseThrow(() -> new IllegalArgumentException("Resource not found"));
         ressourceRepository.delete(ressource);
     }
+
+
+    @Override
+    public Page<RessourceDto> getAllRessWithPagination(Pageable pageable) {
+        return ressourceRepository.findAll(pageable)
+                .map(ressourceMapper::ressourceToRessourceDto);
+    }
+//
+//    @Override
+//    public Page<RessourceDto> getRessSortedByFieldAsc(String field, Pageable pageable) {
+//        Page<ressources> sortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(field).ascending()));
+//        return sortedRess.map(ressourceMapper::ressourceToRessourceDto);
+//    }
+//
+//    @Override
+//    public Page<RessourceDto> getRessSortedByFieldDesc(String field, Pageable pageable) {
+//        Page<ressources> seortedRess = ressourceRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),Sort.by(field).ascending()));
+//        return seortedRess.map(ressourceMapper::ressourceToRessourceDto);
+//    }
 }
