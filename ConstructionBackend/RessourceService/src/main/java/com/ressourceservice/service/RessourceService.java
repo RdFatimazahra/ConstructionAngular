@@ -15,5 +15,5 @@ public interface RessourceService {
     void deleteRessource(int id);
     Page<RessourceDto> getAllRessWithPagination(Pageable pageable);
     Page<RessourceDto> getRessSortedByFieldAsc(String field, Pageable pageable);
-//    Page<RessourceDto> getRessSortedByFieldDesc(String field, Pageable pageable);
+    Page<RessourceDto> getRessSortedByFieldDesc(String field, Pageable pageable);
 }
