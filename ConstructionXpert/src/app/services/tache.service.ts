@@ -55,11 +55,27 @@ export class TacheService {
       .pipe(catchError(this.handleError));
   }
 
+
+
+  getSortedTaches(field: string, direction: 'asc' | 'desc', page: number, size: number): Observable<Page<Tache>> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<Page<Tache>>(`${this.apiUrl}/sort/${direction}`, { params: params.set('field', field) })
+      .pipe(catchError(this.handleError));
+  }
+  
+
+
+
+
+
+
+
+
+
   // getSortedTaches(field: string, direction: 'asc' | 'desc', page: number, size: number): Observable<Page<Tache>> {
   //   const params = new HttpParams().set('page', page).set('size', size);
   //   return this.http.get<Page<Tache>>(`${this.apiUrl}/sort/${direction}?field=${field}`, { params })
   //     .pipe(catchError(this.handleError));
   // }
-
 
 }

@@ -25,6 +25,10 @@ export class ManageTachesComponent {
   pageSize: number = 5; // You can change this to your desired page size
   totalPages: number = 0;
 
+ sortField: string = 'description'; // Default sort field
+ sortDirection: 'asc' | 'desc' = 'asc'; // Default sort direction
+
+
   searchQuery: string = '';
   selectedStatus: string = '';
   filteredTaches: Tache[] = [];
@@ -58,6 +62,31 @@ export class ManageTachesComponent {
     );
   }
   
+  sortTaches(field: string): void {
+    console.log(`Sorting by field: ${field}, direction: ${this.sortDirection}`);
+    this.sortField = field;
+    this.currentPage = 0;
+    this.tacheService.getSortedTaches(field, this.sortDirection, this.currentPage, this.pageSize).subscribe(
+      (data: Page<Tache>) => {
+        console.log('Received sorted taches:', data);
+        this.taches = data.content;
+        this.totalPages = data.totalPages;
+        this.filteredTaches = [...this.taches]; // Update filtered taches as well
+      },
+      error => {
+        console.error('Error loading sorted taches:', error);
+        this.errorMessage = 'Error loading sorted taches';
+      }
+    );
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortTaches(this.sortField);
+  }
+  
+
+
 
   loadProjects(): void {
     const projectIds = [...new Set(this.taches.map(tache => tache.idProjet).filter(id => id !== undefined))];
@@ -74,6 +103,52 @@ export class ManageTachesComponent {
       );
     });
   }
+
+  
+
+
+  // Pagination control methods
+  nextPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.loadPaginatedTaches();
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadPaginatedTaches();
+    }
+  }
+
+  
+  goToPage(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.loadPaginatedTaches();
+    }
+  }
+
+
+
+
+  applyFilters(): void {
+    this.filteredTaches = this.taches.filter(tache => {
+      const matchesSearchQuery = this.searchQuery
+        ? tache.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          (this.projects[tache.idProjet] || '').toLowerCase().includes(this.searchQuery.toLowerCase())
+        : true;
+      
+      const matchesStatus = this.selectedStatus
+        ? tache.statut === this.selectedStatus
+        : true;
+      
+      return matchesSearchQuery && matchesStatus;
+    });
+    console.log('Filtered Taches:', this.filteredTaches); // Debugging line
+  }
+
 
   openDialog(tache: Tache | null = null): void {
     const dialogRef = this.dialog.open(TacheDialogComponent, {
@@ -104,44 +179,7 @@ export class ManageTachesComponent {
     );
   }
 
-  applyFilters(): void {
-    this.filteredTaches = this.taches.filter(tache => {
-      const matchesSearchQuery = this.searchQuery
-        ? tache.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          (this.projects[tache.idProjet] || '').toLowerCase().includes(this.searchQuery.toLowerCase())
-        : true;
-      
-      const matchesStatus = this.selectedStatus
-        ? tache.statut === this.selectedStatus
-        : true;
-      
-      return matchesSearchQuery && matchesStatus;
-    });
-    console.log('Filtered Taches:', this.filteredTaches); // Debugging line
-  }
 
-  // Pagination control methods
-  nextPage(): void {
-    if (this.currentPage < this.totalPages - 1) {
-      this.currentPage++;
-      this.loadPaginatedTaches();
-    }
-  }
-
-  prevPage(): void {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.loadPaginatedTaches();
-    }
-  }
-
-  
-  goToPage(page: number): void {
-    if (page >= 0 && page < this.totalPages) {
-      this.currentPage = page;
-      this.loadPaginatedTaches();
-    }
-  }
 
 }
 
